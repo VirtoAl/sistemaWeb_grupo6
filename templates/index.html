@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Imagens</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+        select, button {
+            margin: 10px 0;
+        }
+        img {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Editor de Imagens</h1>
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required><br>
+            <select name="effect">
+                <option value="gray">Escala de Cinza</option>
+                <option value="blur">Desfoque</option>
+                <option value="median">Desfoque Mediana</option>
+                <option value="binary">Binarização</option>
+                <option value="erosion">Erosão</option>
+                <option value="dilation">Dilatação</option>
+                <option value="opening">Abertura</option>
+                <option value="closing">Fechamento</option>
+            </select><br>
+            <button type="submit">Aplicar Efeito</button>
+        </form>
+
+        {% if filename %}
+            <h2>Imagem Processada</h2>
+            <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Imagem Processada">
+        {% endif %}
+    </div>
+</body>
+</html>
